@@ -1,8 +1,14 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { toolCategories } from "@/data/tools";
 import { ToolCard } from "@/components/ui/tool-card";
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
+import { siteConfig } from "@/lib/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, categoryItemListJsonLd } from "@/lib/seo";
+
+const slugify = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
 
 interface CategoryPageProps {
   params: Promise<{
@@ -17,17 +23,25 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps) {
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = toolCategories.find(
-    (c) => c.name.toLowerCase().replace(/\s+/g, "-") === slug
-  );
+  const category = toolCategories.find((c) => slugify(c.name) === slug);
 
-  if (!category) return { title: "Category Not Found | Notch Tools" };
+  if (!category) return { title: "Category Not Found" };
 
+  const path = `/categories/${slug}`;
   return {
-    title: `${category.name} | Notch Tools`,
+    title: category.name,
     description: category.description,
+    keywords: [category.name.toLowerCase(), `${category.name.toLowerCase()} online`, "free online tools"],
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      title: `${category.name} | ${siteConfig.name}`,
+      description: category.description,
+      url: path,
+      siteName: siteConfig.name,
+    },
   };
 }
 
@@ -43,6 +57,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-8 lg:py-12">
+      <JsonLd data={categoryItemListJsonLd(category)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: "Categories", url: "/categories" },
+          { name: category.name, url: `/categories/${slugify(category.name)}` },
+        ])}
+      />
       {/* Breadcrumbs */}
       <nav className="mb-8 flex items-center text-sm font-medium text-muted-foreground">
         <Link

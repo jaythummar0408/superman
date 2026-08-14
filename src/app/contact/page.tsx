@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Mail, MessageSquare, MapPin } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Us | Notch Tools",
+  title: "Contact Us",
   description: "Get in touch with the Notch Tools team.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

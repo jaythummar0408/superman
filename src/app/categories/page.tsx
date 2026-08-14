@@ -29,8 +29,10 @@ const categoryIcons: Record<string, LucideIcon> = {
 };
 
 export const metadata = {
-  title: "Categories | Notch Tools",
-  description: "Browse all tool categories on Notch Tools.",
+  title: "All Tool Categories",
+  description:
+    "Browse every Notch Tools category — image, PDF, CSS, dev, text, security, social, utility, random and countdown tools. All free and in your browser.",
+  alternates: { canonical: "/categories" },
 };
 
 export default function CategoriesPage() {

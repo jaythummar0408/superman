@@ -17,6 +17,7 @@ interface ToolSectionProps {
   name: string;
   description: string;
   tools: Tool[];
+  id?: string;
 }
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -32,11 +33,11 @@ const categoryIcons: Record<string, LucideIcon> = {
   "Countdown Tools": Timer,
 };
 
-export function ToolSection({ name, description, tools }: ToolSectionProps) {
+export function ToolSection({ name, description, tools, id }: ToolSectionProps) {
   const CategoryIcon = categoryIcons[name] || Wrench;
 
   return (
-    <section className="py-8">
+    <section id={id} className="scroll-mt-24 py-8">
       {/* Category Header */}
       <div className="mb-5  pb-4">
         <div className="flex items-center gap-3">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, Heart } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { SearchModal } from "@/components/ui/search-modal";
 
@@ -16,8 +16,13 @@ export function Header() {
         setIsSearchOpen((open) => !open);
       }
     };
+    const openSearch = () => setIsSearchOpen(true);
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("notch:open-search", openSearch);
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("notch:open-search", openSearch);
+    };
   }, []);
 
   return (
@@ -41,6 +46,15 @@ export function Header() {
             className="hidden text-[13px] text-muted-foreground transition-colors duration-200 hover:text-foreground md:block"
           >
             Categories
+          </Link>
+
+          <Link
+            href="/favorites"
+            aria-label="My favorites"
+            className="hidden h-7 w-7 items-center justify-center text-muted-foreground transition-colors duration-200 hover:text-rose-500 md:flex"
+            title="My favorites"
+          >
+            <Heart className="h-4 w-4" />
           </Link>
 
           {/* Desktop Search Input UI */}
@@ -114,7 +128,7 @@ function MobileMenu() {
           <nav className="mx-auto flex max-w-[1400px] flex-col px-6 py-3 lg:px-10">
             {[
               { href: "/categories", label: "Categories" },
-              { href: "/blog", label: "Blog" },
+              { href: "/favorites", label: "Favorites" },
               { href: "/about", label: "About" },
               { href: "/contact", label: "Contact" },
             ].map((link) => (

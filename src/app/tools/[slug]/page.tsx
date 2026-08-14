@@ -4,6 +4,10 @@ import { ChevronRight, Home, Upload, Settings, Download, ShieldCheck, Zap, Cloud
 import Link from "next/link";
 import { ToolRegistry } from "@/components/tools/tool-registry";
 import { Reveal } from "@/components/ui/reveal";
+import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, softwareAppJsonLd } from "@/lib/seo";
 
 interface ToolPageProps {
   params: Promise<{
@@ -38,15 +42,39 @@ export function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }: ToolPageProps) {
+export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = findToolBySlug(slug);
 
-  if (!data) return { title: "Tool Not Found | Notch Tools" };
+  if (!data) return { title: "Tool Not Found" };
+
+  const { tool, category } = data;
+  const path = tool.href;
+  const keywords = [
+    tool.title.toLowerCase(),
+    `${tool.title.toLowerCase()} online`,
+    `free ${tool.title.toLowerCase()}`,
+    category.name.toLowerCase(),
+    "online tool",
+  ];
 
   return {
-    title: `${data.tool.title} | Notch Tools`,
-    description: data.tool.description,
+    title: tool.title,
+    description: tool.description,
+    keywords,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      title: `${tool.title} | ${siteConfig.name}`,
+      description: tool.description,
+      url: path,
+      siteName: siteConfig.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${tool.title} | ${siteConfig.name}`,
+      description: tool.description,
+    },
   };
 }
 
@@ -91,6 +119,15 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   return (
     <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-8 lg:py-12">
+      <JsonLd data={softwareAppJsonLd(tool)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: "Categories", url: "/categories" },
+          { name: category.name, url: `/categories/${categorySlug}` },
+          { name: tool.title, url: tool.href },
+        ])}
+      />
       {/* Breadcrumbs */}
       <nav className="mb-8 flex flex-wrap items-center text-sm font-medium text-muted-foreground gap-y-2">
         <Link

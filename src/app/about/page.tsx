@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "About Us | Notch Tools",
+  title: "About Us",
   description: "Learn more about Notch Tools and our mission to provide the best free online tools.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

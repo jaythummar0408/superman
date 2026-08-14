@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Terms of Service | Notch Tools",
+  title: "Terms of Service",
   description: "Read the terms of service for using Notch Tools.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

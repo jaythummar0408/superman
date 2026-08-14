@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Privacy Policy | Notch Tools",
+  title: "Privacy Policy",
   description: "Read our privacy policy to understand how we protect your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

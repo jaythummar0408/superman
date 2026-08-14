@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { type LucideIcon } from "lucide-react";
+import { FavoriteButton } from "@/components/ui/favorite-button";
 
 export interface ToolFeature {
   title: string;
@@ -34,36 +35,41 @@ export function ToolCard({ tool }: { tool: Tool }) {
   const Icon = tool.icon;
 
   return (
-    <Link
-      href={tool.href}
-      className="group flex items-start gap-3.5 rounded-lg bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.1)] dark:bg-card dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
-    >
+    <div className="group relative flex items-start gap-3.5 rounded-lg bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] dark:bg-card dark:shadow-[0_1px_3px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.35)]">
       {/* Icon */}
       <div className="mt-0.5 shrink-0">
-        <Icon className="h-5 w-5 text-muted-foreground/80 transition-colors duration-200 group-hover:text-foreground" strokeWidth={1.5} />
+        <Icon className="h-5 w-5 text-muted-foreground/80 transition-colors duration-200 group-hover:text-primary" strokeWidth={1.5} />
       </div>
 
       {/* Content */}
       <div className="min-w-0 flex-1">
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-1.5">
           <h3 className="text-[13px] font-semibold text-foreground leading-tight">
             {tool.title}
           </h3>
-          {tool.available ? (
-            <span className="mt-0.5 shrink-0 inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-[1px] text-[9px] font-medium text-emerald-600 dark:border-emerald-900/40 dark:bg-emerald-900/20 dark:text-emerald-400">
-              <span className="h-1 w-1 rounded-full bg-emerald-500" />
-              Live
-            </span>
-          ) : (
-            <span className="mt-0.5 shrink-0 inline-flex items-center rounded-full bg-secondary/60 px-1.5 py-[1px] text-[9px] font-medium text-muted-foreground border border-border/50">
-              Coming soon
-            </span>
-          )}
+          <div className="relative z-10 flex shrink-0 items-center gap-1">
+            <FavoriteButton href={tool.href} title={tool.title} />
+            {tool.available ? (
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-[1px] text-[9px] font-medium text-emerald-600 dark:border-emerald-900/40 dark:bg-emerald-900/20 dark:text-emerald-400">
+                <span className="h-1 w-1 rounded-full bg-emerald-500" />
+                Live
+              </span>
+            ) : (
+              <span className="inline-flex items-center rounded-full border border-border/50 bg-secondary/60 px-1.5 py-[1px] text-[9px] font-medium text-muted-foreground">
+                Soon
+              </span>
+            )}
+          </div>
         </div>
         <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground line-clamp-2">
           {tool.description}
         </p>
       </div>
-    </Link>
+
+      {/* Stretched link overlay — keeps the favorite button out of the anchor */}
+      <Link href={tool.href} className="absolute inset-0 rounded-lg" aria-label={`Open ${tool.title}`}>
+        <span className="sr-only">Open {tool.title}</span>
+      </Link>
+    </div>
   );
 }
