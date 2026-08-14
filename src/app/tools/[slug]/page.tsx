@@ -3,6 +3,7 @@ import { toolCategories } from "@/data/tools";
 import { ChevronRight, Home, Upload, Settings, Download, ShieldCheck, Zap, CloudOff, Smartphone, CircleCheck, Gift } from "lucide-react";
 import Link from "next/link";
 import { ToolRegistry } from "@/components/tools/tool-registry";
+import { Reveal } from "@/components/ui/reveal";
 
 interface ToolPageProps {
   params: Promise<{
@@ -136,6 +137,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       </div>
 
       {/* How to Use Section */}
+      <Reveal>
       <section className="mx-auto max-w-5xl mb-24">
         <h2 className="text-2xl font-bold text-center text-foreground mb-10">
           How to Use {tool.title}
@@ -152,8 +154,10 @@ export default async function ToolPage({ params }: ToolPageProps) {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* Why Choose Us Section */}
+      <Reveal>
       <section className="mx-auto max-w-5xl mb-24">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold text-foreground">
@@ -173,8 +177,10 @@ export default async function ToolPage({ params }: ToolPageProps) {
           ))}
         </div>
       </section>
+      </Reveal>
 
       {/* FAQ Section */}
+      <Reveal>
       <section className="mx-auto max-w-3xl mb-12">
         <h2 className="text-2xl font-bold text-center text-foreground mb-8">
           Frequently Asked Questions
@@ -193,6 +199,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
           ))}
         </div>
       </section>
+      </Reveal>
     </div>
   );
 }
