@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@cantoo/pdf-lib": "^2.8.2",
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.12",
     "@codemirror/lang-javascript": "^6.2.5",
@@ -43,6 +44,7 @@
     "node-vibrant": "^4.0.4",
     "papaparse": "^5.5.4",
     "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.2.108",
     "qrcode": "^1.5.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",

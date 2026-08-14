@@ -23,6 +23,38 @@ const PdfMerger = dynamic(() => import("./pdf/pdf-merger").then((m) => m.PdfMerg
   ssr: false,
   loading,
 });
+const PdfSplitter = dynamic(() => import("./pdf/pdf-splitter").then((m) => m.PdfSplitter), {
+  ssr: false,
+  loading,
+});
+const PdfPageExtractor = dynamic(
+  () => import("./pdf/pdf-page-extractor").then((m) => m.PdfPageExtractor),
+  { ssr: false, loading }
+);
+const ImageToPdf = dynamic(() => import("./pdf/image-to-pdf").then((m) => m.ImageToPdf), {
+  ssr: false,
+  loading,
+});
+const PdfWatermark = dynamic(() => import("./pdf/pdf-watermark").then((m) => m.PdfWatermark), {
+  ssr: false,
+  loading,
+});
+const PdfProtector = dynamic(() => import("./pdf/pdf-protector").then((m) => m.PdfProtector), {
+  ssr: false,
+  loading,
+});
+const UnlockPdf = dynamic(() => import("./pdf/unlock-pdf").then((m) => m.UnlockPdf), {
+  ssr: false,
+  loading,
+});
+const PdfToImage = dynamic(() => import("./pdf/pdf-to-image").then((m) => m.PdfToImage), {
+  ssr: false,
+  loading,
+});
+const PdfCompressor = dynamic(() => import("./pdf/pdf-compressor").then((m) => m.PdfCompressor), {
+  ssr: false,
+  loading,
+});
 
 // Image tools
 const ImageCompressor = dynamic(
@@ -415,6 +447,78 @@ const RandomNumber = dynamic(() => import("./utility/random-number").then((m) =>
   loading,
 });
 
+// Random generators
+const RandomName = dynamic(() => import("./random/random-name").then((m) => m.RandomName), {
+  ssr: false,
+  loading,
+});
+const RandomUsername = dynamic(() => import("./random/random-username").then((m) => m.RandomUsername), {
+  ssr: false,
+  loading,
+});
+const RandomColor = dynamic(() => import("./random/random-color").then((m) => m.RandomColor), {
+  ssr: false,
+  loading,
+});
+const RandomEmoji = dynamic(() => import("./random/random-emoji").then((m) => m.RandomEmoji), {
+  ssr: false,
+  loading,
+});
+const RandomTeam = dynamic(() => import("./random/random-team").then((m) => m.RandomTeam), {
+  ssr: false,
+  loading,
+});
+const DiceRoller = dynamic(() => import("./random/dice-roller").then((m) => m.DiceRoller), {
+  ssr: false,
+  loading,
+});
+const CoinFlip = dynamic(() => import("./random/coin-flip").then((m) => m.CoinFlip), {
+  ssr: false,
+  loading,
+});
+const FakeUser = dynamic(() => import("./random/fake-user").then((m) => m.FakeUser), {
+  ssr: false,
+  loading,
+});
+
+// Countdown tools
+const BirthdayCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.BirthdayCountdown),
+  { ssr: false, loading }
+);
+const WeddingCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.WeddingCountdown),
+  { ssr: false, loading }
+);
+const EventCountdown = dynamic(() => import("./countdown/countdowns").then((m) => m.EventCountdown), {
+  ssr: false,
+  loading,
+});
+const ExamCountdown = dynamic(() => import("./countdown/countdowns").then((m) => m.ExamCountdown), {
+  ssr: false,
+  loading,
+});
+const NewYearCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.NewYearCountdown),
+  { ssr: false, loading }
+);
+const ProductLaunchCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.ProductLaunchCountdown),
+  { ssr: false, loading }
+);
+const LiveCountdown = dynamic(() => import("./countdown/countdowns").then((m) => m.LiveCountdown), {
+  ssr: false,
+  loading,
+});
+const AnniversaryCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.AnniversaryCountdown),
+  { ssr: false, loading }
+);
+const WebinarCountdown = dynamic(
+  () => import("./countdown/countdowns").then((m) => m.WebinarCountdown),
+  { ssr: false, loading }
+);
+
 interface ToolRegistryProps {
   slug: string;
   toolTitle: string;
@@ -426,6 +530,14 @@ interface ToolRegistryProps {
  */
 const toolComponents: Record<string, React.ComponentType> = {
   "pdf-merger": PdfMerger,
+  "pdf-splitter": PdfSplitter,
+  "pdf-page-extractor": PdfPageExtractor,
+  "image-to-pdf": ImageToPdf,
+  "pdf-watermark": PdfWatermark,
+  "pdf-protector": PdfProtector,
+  "unlock-pdf": UnlockPdf,
+  "pdf-to-image": PdfToImage,
+  "pdf-compressor": PdfCompressor,
   // Image tools
   "image-compressor": ImageCompressor,
   "image-resizer": ImageResizer,
@@ -527,6 +639,27 @@ const toolComponents: Record<string, React.ComponentType> = {
   "bmi-calculator": BmiCalculator,
   "date-difference": DateDifference,
   "random-number": RandomNumber,
+  // Random generators
+  "random-name": RandomName,
+  "random-username": RandomUsername,
+  "random-password": PasswordGenerator,
+  "random-number-generator": RandomNumber,
+  "random-color": RandomColor,
+  "random-emoji": RandomEmoji,
+  "random-team": RandomTeam,
+  "dice-roller": DiceRoller,
+  "coin-flip": CoinFlip,
+  "fake-user": FakeUser,
+  // Countdown tools
+  "birthday-countdown": BirthdayCountdown,
+  "wedding-countdown": WeddingCountdown,
+  "event-countdown": EventCountdown,
+  "exam-countdown": ExamCountdown,
+  "new-year-countdown": NewYearCountdown,
+  "product-launch-countdown": ProductLaunchCountdown,
+  "live-countdown": LiveCountdown,
+  "anniversary-countdown": AnniversaryCountdown,
+  "webinar-countdown": WebinarCountdown,
 };
 
 export function ToolRegistry({ slug, toolTitle }: ToolRegistryProps) {
