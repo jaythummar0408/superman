@@ -3,7 +3,7 @@ import { Coffee } from "lucide-react";
 
 const footerLinks = [
   { href: "/categories", label: "Categories" },
-  { href: "/blog", label: "Blog" },
+  { href: "/favorites", label: "Favorites" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },

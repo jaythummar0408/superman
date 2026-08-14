@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Hero } from "@/components/layout/hero";
+import { WhyUse } from "@/components/layout/why-use";
 import { ToolSection } from "@/components/ui/tool-section";
 import { Reveal } from "@/components/ui/reveal";
 import { Favorites } from "@/components/ui/favorites";
@@ -53,6 +54,10 @@ export default function Home() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal>
+        <WhyUse />
+      </Reveal>
     </>
   );
 }
